@@ -1,10 +1,10 @@
 # stop-music.ps1 (Stop / SessionEnd hook)
 # Pauses playback and restores whatever repeat/shuffle state the user had before start-music.ps1 ran.
 $ErrorActionPreference = 'SilentlyContinue'
-. "$PSScriptRoot\spotify-common.ps1"
+. "$PSScriptRoot/spotify-common.ps1"
 
 $pluginRoot = Split-Path -Parent $PSScriptRoot
-$stateFile = Join-Path $env:TEMP 'claude-spotify-state.json'
+$stateFile = Join-Path ([System.IO.Path]::GetTempPath()) 'claude-spotify-state.json'
 $logPath = Join-Path $pluginRoot 'hook-debug.txt'
 
 function Write-HookLog([string]$msg) {

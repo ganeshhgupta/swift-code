@@ -16,7 +16,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-. "$PSScriptRoot\spotify-common.ps1"
+. "$PSScriptRoot/spotify-common.ps1"
 
 $playlistsPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'playlists.json'
 

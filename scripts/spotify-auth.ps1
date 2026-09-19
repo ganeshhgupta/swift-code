@@ -43,7 +43,17 @@ $listener.Prefixes.Add($prefix)
 $listener.Start()
 
 Write-Host "Opening browser for Spotify login..."
-Start-Process $authUrl
+# Start-Process opens a URL in the default browser on Windows, but not on
+# macOS or Linux, where it tries to run the string as a program. $IsMacOS and
+# $IsLinux are PowerShell 6+ automatics, so on Windows PowerShell 5.1 they are
+# simply unset and this falls through to the original behaviour.
+if ($IsMacOS)     { & '/usr/bin/open' $authUrl }
+elseif ($IsLinux) { & 'xdg-open' $authUrl }
+else              { Start-Process $authUrl }
+if (-not $?) {
+    Write-Host "Could not open a browser automatically. Open this URL yourself:"
+    Write-Host $authUrl
+}
 
 Write-Host "Waiting for you to approve access in the browser..."
 $context = $listener.GetContext()

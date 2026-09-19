@@ -6,10 +6,10 @@
 # it picked via currently-playing, seek that track to ~65% in (chorus/hook),
 # then switch to single-track repeat so the whole song loops.
 $ErrorActionPreference = 'SilentlyContinue'
-. "$PSScriptRoot\spotify-common.ps1"
+. "$PSScriptRoot/spotify-common.ps1"
 
 $pluginRoot = Split-Path -Parent $PSScriptRoot
-$stateFile = Join-Path $env:TEMP 'claude-spotify-state.json'
+$stateFile = Join-Path ([System.IO.Path]::GetTempPath()) 'claude-spotify-state.json'
 $playlistsPath = Join-Path $pluginRoot 'playlists.json'
 $logPath = Join-Path $pluginRoot 'hook-debug.txt'
 
