@@ -1,0 +1,5 @@
+{
+  "name": "swift-code",
+  "description": "Loops a random song's chorus/hook from your tracked Spotify playlists while Claude Code works on a prompt, stops when the turn ends. Manage tracked playlists by asking to add/list/remove a playlist",
+  "version": "2.0.0"
+}
