@@ -2,6 +2,8 @@
 
 ![swift-code](ts.jpg)
 
+> *none of it was accidental*
+
 A Claude Code plugin that plays music while Claude works.
 
 Turn it on, and every time you send Claude Code a prompt, a random song from your Spotify playlists starts playing (right around the chorus, so you don't wait through a slow intro) and loops until Claude finishes responding. Then it stops. Ships with a Taylor Swift playlist by default, but you can point it at any playlist you like.
@@ -63,7 +65,7 @@ That's the whole install. Nothing else to configure.
 
 </details>
 
-Claude Code picks up anything in `~/.claude/skills/` on startup, so if you're already in a session, start a new one.
+Claude Code picks up anything in `~/.claude/skills/` on startup, so if you're already in a session, start a new one. There is no config to register and no flag to pass: the hooks in `hooks/hooks.json` are the *invisible string* tying your prompts to the music.
 
 ## Connect it to your Spotify account
 
@@ -130,9 +132,12 @@ Claude handles the rest. Every prompt after that randomly picks a song from what
 - You need **Spotify Premium**. Free accounts can't be controlled through Spotify's API, only viewed.
 - `config.json` and `tokens.json` are gitignored on purpose. Never commit or share those; they're tied to your Spotify account.
 - Songs start about 65% of the way through, which usually lands somewhere around the chorus or hook, and loop from there until Claude's done.
+- It borrows your player rather than taking it over. Before starting anything it records your current shuffle and repeat settings, and when the turn ends it puts them back *right where you left* them.
 - Spotify's playlist-items endpoint is blocked for apps in Development Mode, so the plugin can't read a playlist's track list directly. It works around this by turning on shuffle, starting the playlist, and reading back whichever track Spotify picked.
 
 ## Troubleshooting
+
+Nothing here fails loudly. If the music simply never arrives, it is almost always one of these.
 
 | Symptom | Cause |
 |---|---|
